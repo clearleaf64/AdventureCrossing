@@ -153,6 +153,7 @@ local velocity = evolved.builder()
 
 local room_entity_list = evolved.builder()
     :default({})
+    :duplicate(clone_table)
     :build()
 
 local bpp_mode = evolved.builder()

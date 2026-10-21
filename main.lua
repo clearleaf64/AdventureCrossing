@@ -1,11 +1,21 @@
 local btn = require "lib.btn"
 local evo = require "lib.evolved"
+local prefabs = require "ecs.prefabs"
+local id = require "ecs.components"
+
+local player
+
+function spawn_entity(ent)
+    local a = ent:build()
+    --add_to_collision_world(a)
+    return a
+end
+
 
 function _init()
-  -- Live reload preserves globals across saved edits but resets locals.
-  -- Stash mutable game state in a capitalized global like `State` so it
-  -- survives reloads; F5 calls _init again to reset.
   State = {}
+  player = spawn_entity(prefabs.player)
+  
 end
 
 function _update(dt)
@@ -13,19 +23,7 @@ function _update(dt)
 end
 
 function _draw(dt)
-  
-  local a = btn.LEFT
   gfx.clear(gfx.COLOR_BLACK)
-  if a == 0 then
-    gfx.clear(gfx.COLOR_RED)
-    print("Pressed!")
-  end
-  if a > 0 then
-    gfx.clear(gfx.COLOR_BLACK)
-  end
-  if a == -1 then
-    gfx.clear(gfx.COLOR_WHITE)
-    print("Released!")
-  end
-  gfx.text(a, 10, 10, gfx.COLOR_WHITE)
+  local x,y,s = evo.get(player,id.position_x,id.position_y,id.sprite)
+  gfx.spr(s,x,y)
 end

@@ -18,9 +18,14 @@ function _draw(dt)
   gfx.clear(gfx.COLOR_BLACK)
   if a == 0 then
     gfx.clear(gfx.COLOR_RED)
+    print("Pressed!")
   end
   if a > 0 then
     gfx.clear(gfx.COLOR_BLACK)
+  end
+  if a == -1 then
+    gfx.clear(gfx.COLOR_WHITE)
+    print("Released!")
   end
   gfx.text(a, 10, 10, gfx.COLOR_WHITE)
 end
